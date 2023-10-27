@@ -7,7 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('library-manager:server');
 var http = require('http');
-
+var sequelize = require('../models').sequelize;
 /**
  * Get port from environment and store in Express.
  */
@@ -25,9 +25,21 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+sequelize.sync().then(() => {
+  server.listen(port);
+})
 server.on('error', onError);
 server.on('listening', onListening);
+
+// check for database connection
+(async () => {
+  try {
+    await sequelize.authenticate();
+    console.log('Connection to the database successful!');
+  } catch (error) {
+    console.error('Error connecting to the database: ', error);
+  }
+})();
 
 /**
  * Normalize a port into a number, string, or false.
