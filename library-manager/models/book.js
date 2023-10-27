@@ -32,10 +32,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           notNull: {
-            msg: '"Title" cannot be blank',
+            msg: '"Author" cannot be blank',
           },
           notEmpty: {
-            msg: '"Title" cannot be blank',
+            msg: '"Author" cannot be blank',
           },
         },
       },
