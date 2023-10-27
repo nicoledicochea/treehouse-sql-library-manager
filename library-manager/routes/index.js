@@ -10,9 +10,10 @@ router.get('/', async function(req, res, next) {
   // next(err)
 
   // res.render('index', { title: 'Express' });
-  const books = await Book.findAll();
-  console.log(books)
-  await res.json(books)
+  // const books = await Book.findAll();
+  // console.log(books)
+  // await res.json(books)
+  res.redirect('/books')
   
 });
 
