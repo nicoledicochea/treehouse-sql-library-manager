@@ -23,24 +23,23 @@ router.post('/new', async(req, res) => {
 router.get('/:id', async(req, res) => {
     const id = req.params.id
     const book = await Book.findByPk(id)
-    console.log(book)
-    res.render('book', { book })
-    console.log(book)
-
+    res.render('update-book', { book })
 })
 
 // update info in database
-router.post(':id', async(req, res) => {
+router.post('/:id', async(req, res) => {
     const id = req.params.id
     const book = await Book.findByPk(id)
     await book.update(req.body)
     res.redirect(`/books/${book.id}`)
 })
+
 // delete a book
-router.post(':id/delete', async(req, res) => {
+router.post('/:id/delete', async(req, res) => {
     const id = req.params.id
     const book = await Book.findByPk(id)
     await book.destroy()
+    res.redirect('/')
 })
 
 module.exports = router;
