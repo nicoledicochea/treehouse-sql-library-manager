@@ -38,6 +38,13 @@ router.get("/:id", async (req, res) => {
   res.render("update-book", { book });
 });
 
+// show individual book details
+router.get("/:id", async (req, res) => {
+  const id = req.params.id;
+  const book = await Book.findByPk(id);
+  res.render("update-book", { book });
+});
+
 // update info in database
 router.post("/:id", async (req, res) => {
   const id = req.params.id;

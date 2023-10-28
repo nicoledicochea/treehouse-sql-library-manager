@@ -1,0 +1,30 @@
+extends layout
+
+block content
+    h1 Book Details
+    if errors 
+        h2.error Errors
+        if errors[0]
+            h3.error #{errors[0].message}
+        if errors[1]
+            h3.error #{errors[1].message}
+    p   
+        p.category Title
+        p.value= book.genre
+    p   
+        p.category Author
+        p.value= book.author
+    p   
+        p.category Genre
+        p.value= book.genre
+    p   
+        p.category Year
+        p.value= book.year
+    p
+        a.updateButton(href=`/books/${book.id}/edit`) Update Book
+
+    form(method='POST' action=`/books/${book.id}/delete`)
+        p
+            a.button(href='/books') Cancel
+        p
+            input(type='submit' value='Delete Book')
