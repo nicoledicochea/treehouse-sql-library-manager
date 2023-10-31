@@ -134,3 +134,16 @@ input[type=text] {
 input.delete:hover{
   background-color: #818998;
 } */
+
+.errorStack {
+  /* background-color: red; */
+  /* overflow: scroll; */
+  font-size: 12px;
+  word-break: break-all;
+  margin: auto;
+}
+
+.errorStack::first-line {
+  font-weight: bold;
+  font-size: 16px;
+}

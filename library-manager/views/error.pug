@@ -3,7 +3,8 @@ extends layout
 block content
   h1 Server Error
   h2= err.status
-  pre #{err.stack}
-  br
+  .errorStack
+    pre #{err.stack}
+    br
   p
     a.button(href='/books') Home

@@ -3,7 +3,10 @@ const router = express.Router();
 const Book = require("../models").Book;
 
 // show full list of books
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
+  // const err = new Error()
+  // err.status = 500
+  // next(err)
   const books = await Book.findAll({
     order: [["createdAt", "DESC"]],
   });
@@ -41,8 +44,10 @@ router.get("/:id", async (req, res) => {
 // show individual book details
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
-  const book = await Book.findByPk(id);
-  res.render("update-book", { book });
+  if(id) {
+    const book = await Book.findByPk(id);
+    res.render("update-book", { book });
+  }
 });
 
 // update info in database
