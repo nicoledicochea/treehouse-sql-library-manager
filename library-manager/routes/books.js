@@ -44,9 +44,20 @@ router.post("/search", async(req, res) => {
       // from sequelize documentation:
         // [Op.substring]: 'hat',                   
         // LIKE '%hat%'
-      title: {
-        [Op.substring]: searchTerm
-      }
+      [Op.or]: [
+        {title: {
+          [Op.substring]: searchTerm
+        }},
+        {author: {
+          [Op.substring]: searchTerm
+        }},
+        {genre: {
+          [Op.substring]: searchTerm
+        }},
+        {year: {
+          [Op.substring]: searchTerm
+        }}
+      ]
     }
   })
   if(matchingBooks.length === 0) {
