@@ -2,15 +2,15 @@ extends layout
 
 block content
   h1 
-    a(href="/") Books
+    a(href="/") Search
   p
     a.button(href='/books/new') Create New Book
   form(action=`/books/search`, method="post") 
     input(type="text", name="search")
     button(type="submit") Search
-  if title 
-    h2= title
-  if !title
+  if noResults 
+    h2= noResults
+  if !noResults
     table
       thead
         tr

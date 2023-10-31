@@ -39,19 +39,19 @@ router.post("/new", async (req, res) => {
 router.post("/search", async(req, res) => {
   const searchTerm = req.body.search
   const matchingBooks = await Book.findAll({
+    order: [["createdAt", "DESC"]],
     where: {
-      // [Op.substring]: 'hat',                   
-      // LIKE '%hat%'
+      // from sequelize documentation:
+        // [Op.substring]: 'hat',                   
+        // LIKE '%hat%'
       title: {
         [Op.substring]: searchTerm
       }
     }
   })
   if(matchingBooks.length === 0) {
-    console.log("No results found")
-    res.render("search", { books: matchingBooks, title: 'No results found' });
+    res.render("search", { books: matchingBooks, noResults: 'No results found' });
   }
-  console.log(matchingBooks)
   res.render("search", { books: matchingBooks });
 })
 
