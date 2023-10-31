@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1 
-    a(href="/") Books
+    a(href="/books/page/1") Books
   p
     a.button(href='/books/new') Create New Book
   form(action=`/books/search`, method="post") 
@@ -23,4 +23,6 @@ block content
           td= book.author
           td= book.genre
           td= book.year
-
+  form(action=`/books/page/${pageNum}`, method="post")
+    input(type="submit", name="page", value="previous")
+    input(type="submit", name="page", value="next")

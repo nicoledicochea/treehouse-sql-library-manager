@@ -4,15 +4,55 @@ const Book = require("../models").Book;
 const { Op } = require("sequelize")
 
 // show full list of books
-router.get("/", async (req, res, next) => {
+// router.get("/", async (req, res, next) => {
+//   // const err = new Error()
+//   // err.status = 500
+//   // next(err)
+//   let pageNum = 2
+//   const books = await Book.findAll();
+//   res.render("index", { books, title: "Books", pageNum });
+// });
+
+router.get("/page/:pageNum", async (req, res, next) => {
   // const err = new Error()
   // err.status = 500
   // next(err)
+  let pageNum = +req.params.pageNum
+  const booksPerPage = 5
   const books = await Book.findAll({
     order: [["createdAt", "DESC"]],
-  });
-  res.render("index", { books, title: "Books" });
+    limit: booksPerPage,
+    offset: booksPerPage * (pageNum - 1)
+  })
+  res.render("index", { books, title: "Books", pageNum });
 });
+
+// {
+//   order: [["createdAt", "DESC"]],
+//   limit: 5,
+//   offset: 5 * (pageNum - 1)
+// }
+
+// pagination
+router.post("/page/:pageNum", async (req, res) => {
+  let pageNum = +req.params.pageNum
+  const page = req.body.page
+  const booksPerPage = 5
+  // const books = await Book.findAll({
+  //   order: [["createdAt", "DESC"]],
+  //   limit: booksPerPage,
+  //   offset: booksPerPage * (pageNum - 1)
+  // })
+  const totalPages = Math.floor(await Book.count() / booksPerPage)
+  if(page === 'previous' && pageNum > 1) {
+    pageNum--
+  } 
+  if (page === 'next' && pageNum <= totalPages) {
+    pageNum++
+  }
+  res.redirect(`/books/page/${pageNum}`)
+  // res.render("index", { books, title: "Books", pageNum });
+})
 
 // show create new book form
 router.get("/new", (req, res) => {
