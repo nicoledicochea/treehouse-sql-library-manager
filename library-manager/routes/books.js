@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Book = require("../models").Book;
+const { Op } = require("sequelize")
 
 // show full list of books
 router.get("/", async (req, res, next) => {
@@ -34,6 +35,26 @@ router.post("/new", async (req, res) => {
   }
 });
 
+// search
+router.post("/search", async(req, res) => {
+  const searchTerm = req.body.search
+  const matchingBooks = await Book.findAll({
+    where: {
+      // [Op.substring]: 'hat',                   
+      // LIKE '%hat%'
+      title: {
+        [Op.substring]: searchTerm
+      }
+    }
+  })
+  if(matchingBooks.length === 0) {
+    console.log("No results found")
+    res.render("search", { books: matchingBooks, title: 'No results found' });
+  }
+  console.log(matchingBooks)
+  res.render("search", { books: matchingBooks });
+})
+
 // show individual book details
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
@@ -53,7 +74,8 @@ router.get("/:id", async (req, res) => {
 // update info in database
 router.post("/:id", async (req, res) => {
   const id = req.params.id;
-  let book = await Book.findByPk(id);
+  let book = await Book.findByPk(req.params.id);
+  console.log(book)
   try {
     if(book) {
         book = await book.update(req.body);
@@ -73,7 +95,9 @@ router.post("/:id/delete", async (req, res) => {
   const id = req.params.id;
   const book = await Book.findByPk(id);
   await book.destroy();
-  res.redirect("/");
+  res.redirect("/");ç
 });
+
+
 
 module.exports = router;
