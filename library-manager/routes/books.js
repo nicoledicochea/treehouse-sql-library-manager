@@ -52,9 +52,15 @@ router.post("/new", async (req, res) => {
 // show individual book details
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
-  if(id) {
+  const book = await Book.findByPk(id);
+  if(book) {
     const book = await Book.findByPk(id);
     res.render("update-book", { book });
+  } else {
+    const error = new Error()
+    error.status = 404
+    error.message =  "Sorry! We couldn't find the page you were looking for."
+    res.render('page-not-found', { error })
   }
 });
 
@@ -62,7 +68,6 @@ router.get("/:id", async (req, res) => {
 router.post("/:id", async (req, res) => {
   const id = req.params.id;
   let book = await Book.findByPk(req.params.id);
-  console.log(book)
   try {
     if(book) {
         book = await book.update(req.body);
@@ -73,7 +78,7 @@ router.post("/:id", async (req, res) => {
         book = await Book.build(req.body)
         book.id = id
         res.render('update-book', { book, errors: error.errors })
-    } 
+    }
   }
 });
 
@@ -82,9 +87,7 @@ router.post("/:id/delete", async (req, res) => {
   const id = req.params.id;
   const book = await Book.findByPk(id);
   await book.destroy();
-  res.redirect("/");ç
+  res.redirect("/");
 });
-
-
 
 module.exports = router;

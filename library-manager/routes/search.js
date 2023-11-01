@@ -84,6 +84,4 @@ router.get("/:searchTerm/page/:pageNum", async (req, res) => {
   res.render("search", { books: matchingBooks.rows, pageNum, searchTerm, totalPages });
 })
 
-
-
 module.exports = router;
