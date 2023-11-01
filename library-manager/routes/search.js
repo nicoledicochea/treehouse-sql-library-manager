@@ -6,10 +6,14 @@ const { Op } = require("sequelize")
 // number of books to show for pagination 
 const booksPerPage = 5
 
+// redirect empty search string to index
+router.get("/",async (req, res) => {
+  res.redirect('/')
+})
+
 // search books
 router.post("/", async(req, res) => {
   const searchTerm = req.body.search
-  console.log(searchTerm)
   res.redirect(`/search/${searchTerm}`)
 })
 
