@@ -67,7 +67,7 @@ h2 {
 table {
   /* border-left: 1px solid #464655; */
   border-bottom: 20px solid #a9adb8;
-  max-width: max-content;
+  /* max-width: max-content; */
 }
 
 th {
@@ -124,7 +124,7 @@ input[type=text] {
 }
 
 .error {
-  color: rgb(236, 15, 15);
+  color: rgb(164, 16, 16);
 }
 
 /* input.delete {

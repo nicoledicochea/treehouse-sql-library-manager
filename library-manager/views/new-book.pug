@@ -6,9 +6,9 @@ block content
     if errors 
         h2.error Errors
         if errors[0]
-            p.error #{errors[0].message}
+            h3.error #{errors[0].message}
         if errors[1]
-            p.error #{errors[1].message}
+            h3.error #{errors[1].message}
     form(method='POST' action='/books/new')
         p
             label(for='title') Title
