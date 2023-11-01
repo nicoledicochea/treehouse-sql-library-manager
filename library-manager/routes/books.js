@@ -3,29 +3,35 @@ const router = express.Router();
 const Book = require("../models").Book;
 const { Op } = require("sequelize")
 
+
+const booksPerPage = 5
+
 // show full list of books
+router.get("/", async (req, res, next) => {
+  // const err = new Error()
+  // err.status = 500
+  // next(err)
+  let pageNum = 2
+  const books = await Book.findAll({
+    order: [["createdAt", "DESC"]],
+    limit: booksPerPage,
+  });
+  res.render("index", { books, title: "Books", pageNum });
+});
+
 // router.get("/", async (req, res, next) => {
 //   // const err = new Error()
 //   // err.status = 500
 //   // next(err)
-//   let pageNum = 2
-//   const books = await Book.findAll();
+//   let pageNum = +req.params.pageNum
+//   const booksPerPage = 5
+//   const books = await Book.findAll({
+//     order: [["createdAt", "DESC"]],
+//     limit: booksPerPage,
+//     offset: booksPerPage * (pageNum - 1)
+//   })
 //   res.render("index", { books, title: "Books", pageNum });
 // });
-
-router.get("/page/:pageNum", async (req, res, next) => {
-  // const err = new Error()
-  // err.status = 500
-  // next(err)
-  let pageNum = +req.params.pageNum
-  const booksPerPage = 5
-  const books = await Book.findAll({
-    order: [["createdAt", "DESC"]],
-    limit: booksPerPage,
-    offset: booksPerPage * (pageNum - 1)
-  })
-  res.render("index", { books, title: "Books", pageNum });
-});
 
 // {
 //   order: [["createdAt", "DESC"]],
@@ -37,12 +43,11 @@ router.get("/page/:pageNum", async (req, res, next) => {
 router.post("/page/:pageNum", async (req, res) => {
   let pageNum = +req.params.pageNum
   const page = req.body.page
-  const booksPerPage = 5
-  // const books = await Book.findAll({
-  //   order: [["createdAt", "DESC"]],
-  //   limit: booksPerPage,
-  //   offset: booksPerPage * (pageNum - 1)
-  // })
+  const books = await Book.findAll({
+    order: [["createdAt", "DESC"]],
+    limit: booksPerPage,
+    offset: booksPerPage * (pageNum - 1)
+  })
   const totalPages = Math.floor(await Book.count() / booksPerPage)
   if(page === 'previous' && pageNum > 1) {
     pageNum--
@@ -50,8 +55,7 @@ router.post("/page/:pageNum", async (req, res) => {
   if (page === 'next' && pageNum <= totalPages) {
     pageNum++
   }
-  res.redirect(`/books/page/${pageNum}`)
-  // res.render("index", { books, title: "Books", pageNum });
+  res.render("index", { books, title: "Books", pageNum });
 })
 
 // show create new book form
@@ -78,6 +82,7 @@ router.post("/new", async (req, res) => {
 // search
 router.post("/search", async(req, res) => {
   const searchTerm = req.body.search
+  let pageNum = 2
   const matchingBooks = await Book.findAll({
     order: [["createdAt", "DESC"]],
     where: {
@@ -103,8 +108,23 @@ router.post("/search", async(req, res) => {
   if(matchingBooks.length === 0) {
     res.render("search", { books: matchingBooks, noResults: 'No results found' });
   }
-  res.render("search", { books: matchingBooks });
+  res.render("search", { books: matchingBooks, pageNum });
 })
+
+// // pagination search
+// router.post("/search/page/:pageNum", async (req, res) => {
+//   let pageNum = +req.params.pageNum
+//   const page = req.body.page
+//   const totalPages = Math.floor(await Book.count() / booksPerPage)
+//   if(page === 'previous' && pageNum > 1) {
+//     pageNum--
+//   } 
+//   if (page === 'next' && pageNum <= totalPages) {
+//     pageNum++
+//   }
+//   res.redirect(`/books/search/page/${pageNum}`)
+// })
+
 
 // show individual book details
 router.get("/:id", async (req, res) => {
