@@ -5,9 +5,9 @@ block content
     a(href="/") Books
   p
     a.button(href='/books/new') Create New Book
-  form(action=`/search`, method="post") 
+  form.search(action=`/search`, method="post") 
     input(type="text", name="search")
-    button(type="submit") Search
+    button.search-btn(type="submit") Search
   table
     thead
       tr

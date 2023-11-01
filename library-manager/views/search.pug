@@ -3,11 +3,11 @@ extends layout
 block content
   h1 
     a(href="/") Search
-  p
-    a.button(href='/books/new') Create New Book
-  form(action=`/search`, method="post") 
+  //- p
+  //-   a.button(href='/books/new') Create New Book
+  form.search(action=`/search`, method="post") 
     input(type="text", name="search")
-    button(type="submit") Search
+    button.search-btn(type="submit") Search
   if noResults 
     h2= noResults
   if !noResults
@@ -30,6 +30,6 @@ block content
       a.prev(href=`/search/${searchTerm}/page/${pageNum - 1}`) Previous
     if pageNum < totalPages
       a.next(href=`/search/${searchTerm}/page/${pageNum + 1}`) Next
-    p
-      a.button(href='/') Home
+  p
+    a.button(href='/') Home
 

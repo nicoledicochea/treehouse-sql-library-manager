@@ -151,3 +151,36 @@ input.delete:hover{
 .prev {
   background-color: #959ead;
 }
+form.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 15px;
+}
+
+form.search input {
+  width: 60%;
+  margin-left: 1px;
+  margin-right: 2px;
+}
+.search-btn {
+  height: 42px;
+  width: 40%;
+  border: none;
+  /* border: 1px #a9adb8 solid; */
+  background-color: #dfdbde;
+  color: #464655;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-right: 2px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: 0.4s;
+}
+
+.search-btn:hover {
+  background-color: #464655;
+  color: #dfdbde;
+}
