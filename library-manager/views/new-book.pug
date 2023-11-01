@@ -1,7 +1,8 @@
 extends layout
 
 block content
-    h1 New Book
+    h1 
+        a(href='/') New Book
     if errors 
         h2.error Errors
         if errors[0]
@@ -37,4 +38,4 @@ block content
         p
             input(type='submit' value='Create New Book')
         p
-            a.button(href='/books') Cancel
+            a.button(href='/') Cancel

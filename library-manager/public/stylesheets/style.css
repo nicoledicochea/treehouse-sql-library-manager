@@ -20,7 +20,7 @@ a:hover {
   color: #818998;
 }
 
-a.button, input[type=submit] {
+a.button, input[type=submit], .prev, .next {
   color: white;
   background: #818998;
   font-family:Arial, Helvetica, sans-serif;
@@ -43,10 +43,10 @@ input[type=submit], a.button {
   border: 0;
 }
 
-  a.button:hover, input[type=submit]:hover {
-    background-color: #464655;
-    color: white;
-  }
+a.button:hover, input[type=submit]:hover, .prev:hover, .next:hover {
+  background-color: #464655;
+  color: white;
+}
 
 p {
   margin: 20px auto;
@@ -146,4 +146,8 @@ input.delete:hover{
 .errorStack::first-line {
   font-weight: bold;
   font-size: 16px;
+}
+
+.prev {
+  background-color: #959ead;
 }

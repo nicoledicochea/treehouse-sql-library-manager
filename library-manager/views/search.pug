@@ -26,10 +26,10 @@ block content
             td= book.author
             td= book.genre
             td= book.year
-  //- form(action=`/books/search/${searchTerm}/page/${pageNum}`, method="post")
-  //-   input(type="submit", name="page", value="previous")
-  //- form(action=`/books/search/${searchTerm}/page/${pageNum}`, method="post")
-    input(type="submit", name="page", value="next")
-  p
-    a.button(href='/books') Home
+    if pageNum > 1
+      a.prev(href=`/books/search/${searchTerm}/page/${pageNum - 1}`) Previous
+    if pageNum < totalPages
+      a.next(href=`/books/search/${searchTerm}/page/${pageNum + 1}`) Next
+    p
+      a.button(href='/') Home
 

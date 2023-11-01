@@ -13,7 +13,7 @@ router.get('/', async function(req, res, next) {
   // const books = await Book.findAll();
   // console.log(books)
   // await res.json(books)
-  res.redirect('/books/page/1')
+  res.redirect('/books')
   
 });
 

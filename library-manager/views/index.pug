@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1 
-    a(href="/books") Books
+    a(href="/") Books
   p
     a.button(href='/books/new') Create New Book
   form(action=`/books/search`, method="post") 
@@ -23,12 +23,8 @@ block content
           td= book.author
           td= book.genre
           td= book.year
-  //- form(action=`/books/page/${pageNum}`, method="post")
-  //-   input(type="submit", name="page", value="previous")
-  //- form(action=`/books/page/${pageNum}`, method="post")
-  //-   input(type="submit", name="page", value="next")
   if pageNum > 1 
-    a(href=`/books/page/${pageNum - 1}`) Previous
+    a.prev(href=`/books/page/${pageNum - 1}`) Previous
   if pageNum < totalPages
-    a(href=`/books/page/${pageNum + 1}`) Next
+    a.next(href=`/books/page/${pageNum + 1}`) Next
 
