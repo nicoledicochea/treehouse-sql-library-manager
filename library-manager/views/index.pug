@@ -23,6 +23,12 @@ block content
           td= book.author
           td= book.genre
           td= book.year
-  form(action=`/books/page/${pageNum}`, method="post")
-    input(type="submit", name="page", value="previous")
-    input(type="submit", name="page", value="next")
+  //- form(action=`/books/page/${pageNum}`, method="post")
+  //-   input(type="submit", name="page", value="previous")
+  //- form(action=`/books/page/${pageNum}`, method="post")
+  //-   input(type="submit", name="page", value="next")
+  if pageNum > 1 
+    a(href=`/books/page/${pageNum - 1}`) Previous
+  if pageNum < totalPages
+    a(href=`/books/page/${pageNum + 1}`) Next
+
