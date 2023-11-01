@@ -50,86 +50,86 @@ router.post("/new", async (req, res) => {
   }
 });
 
-// search books
-router.post("/search", async(req, res) => {
-  const searchTerm = req.body.search
-  res.redirect(`/books/search/${searchTerm}`)
-})
+// // search books
+// router.post("/search", async(req, res) => {
+//   const searchTerm = req.body.search
+//   res.redirect(`/books/search/${searchTerm}`)
+// })
 
-// show search results
-router.get("/search/:searchTerm", async (req, res) => {
-  const searchTerm = req.params.searchTerm
-  const pageNum = 1
-  const matchingBooks = await Book.findAndCountAll({
-    order: [["createdAt", "DESC"]],
-    limit: booksPerPage,
-    where: {
-      // from sequelize documentation:
-        // [Op.substring]: 'hat',                   
-        // LIKE '%hat%'
-      [Op.or]: [
-        {title: {
-          [Op.substring]: searchTerm
-        }},
-        {author: {
-          [Op.substring]: searchTerm
-        }},
-        {genre: {
-          [Op.substring]: searchTerm
-        }},
-        {year: {
-          [Op.substring]: searchTerm
-        }}
-      ]
-    }
-  })
-  const totalPages = Math.ceil(matchingBooks.count / booksPerPage)
-  if(matchingBooks.count === 0) {
-    res.render("search", { books: matchingBooks.rows, noResults: 'No results found' });
-  } else {
-    res.render("search", { books: matchingBooks.rows, searchTerm, pageNum, totalPages });
-  }
-});
+// // show search results
+// router.get("/search/:searchTerm", async (req, res) => {
+//   const searchTerm = req.params.searchTerm
+//   const pageNum = 1
+//   const matchingBooks = await Book.findAndCountAll({
+//     order: [["createdAt", "DESC"]],
+//     limit: booksPerPage,
+//     where: {
+//       // from sequelize documentation:
+//         // [Op.substring]: 'hat',                   
+//         // LIKE '%hat%'
+//       [Op.or]: [
+//         {title: {
+//           [Op.substring]: searchTerm
+//         }},
+//         {author: {
+//           [Op.substring]: searchTerm
+//         }},
+//         {genre: {
+//           [Op.substring]: searchTerm
+//         }},
+//         {year: {
+//           [Op.substring]: searchTerm
+//         }}
+//       ]
+//     }
+//   })
+//   const totalPages = Math.ceil(matchingBooks.count / booksPerPage)
+//   if(matchingBooks.count === 0) {
+//     res.render("search", { books: matchingBooks.rows, noResults: 'No results found' });
+//   } else {
+//     res.render("search", { books: matchingBooks.rows, searchTerm, pageNum, totalPages });
+//   }
+// });
 
-// search listing pagination
-router.get("/search/:searchTerm/page/:pageNum", async (req, res) => {
-  const pageNum = +req.params.pageNum
-  const searchTerm = req.params.searchTerm
-  const matchingBooks = await Book.findAndCountAll({
-    order: [["createdAt", "DESC"]],
-    limit: booksPerPage,
-    offset: booksPerPage * (pageNum - 1),
-    where: {
-      // from sequelize documentation:
-        // [Op.substring]: 'hat',                   
-        // LIKE '%hat%'
-      [Op.or]: [
-        {title: {
-          [Op.substring]: searchTerm
-        }},
-        {author: {
-          [Op.substring]: searchTerm
-        }},
-        {genre: {
-          [Op.substring]: searchTerm
-        }},
-        {year: {
-          [Op.substring]: searchTerm
-        }}
-      ]
-    }
-  })
-  const totalPages = Math.ceil(matchingBooks.count / booksPerPage)
-  res.render("search", { books: matchingBooks.rows, pageNum, searchTerm, totalPages });
-})
+// // search listing pagination
+// router.get("/search/:searchTerm/page/:pageNum", async (req, res) => {
+//   const pageNum = +req.params.pageNum
+//   const searchTerm = req.params.searchTerm
+//   const matchingBooks = await Book.findAndCountAll({
+//     order: [["createdAt", "DESC"]],
+//     limit: booksPerPage,
+//     offset: booksPerPage * (pageNum - 1),
+//     where: {
+//       // from sequelize documentation:
+//         // [Op.substring]: 'hat',                   
+//         // LIKE '%hat%'
+//       [Op.or]: [
+//         {title: {
+//           [Op.substring]: searchTerm
+//         }},
+//         {author: {
+//           [Op.substring]: searchTerm
+//         }},
+//         {genre: {
+//           [Op.substring]: searchTerm
+//         }},
+//         {year: {
+//           [Op.substring]: searchTerm
+//         }}
+//       ]
+//     }
+//   })
+//   const totalPages = Math.ceil(matchingBooks.count / booksPerPage)
+//   res.render("search", { books: matchingBooks.rows, pageNum, searchTerm, totalPages });
+// })
 
 
-// show individual book details
-router.get("/:id", async (req, res) => {
-  const id = req.params.id;
-  const book = await Book.findByPk(id);
-  res.render("update-book", { book });
-});
+// // show individual book details
+// router.get("/:id", async (req, res) => {
+//   const id = req.params.id;
+//   const book = await Book.findByPk(id);
+//   res.render("update-book", { book });
+// });
 
 // show individual book details
 router.get("/:id", async (req, res) => {
