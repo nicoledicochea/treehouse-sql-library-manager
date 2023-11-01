@@ -1,5 +1,5 @@
 # SQL Library Manager
-#### Run the following in the terminal to run the program.
+### Run the following in the terminal to run the program.
 
 Navigate to the correct folder
 ``` 
