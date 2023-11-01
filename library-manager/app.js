@@ -30,12 +30,12 @@ app.use('/users', usersRouter);
 app.use('/books', booksRouter);
 app.use('/search', searchRouter);
 
-// catch 404 and forward to error handler
+// error 404 handler
 app.use(function(req, res, next) {
-  // next(createError(404));
   const error = new Error();
   error.status = 404;
   error.message = "Sorry! We couldn't find the page you were looking for."
+  console.log(error.status, error.message)
   res.render('page-not-found', { error })
 });
 
@@ -46,9 +46,6 @@ app.use(function(err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  // res.status(err.status || 500);
-  // res.render('error');
-
   err.status = err.status || 500;
   err.message = err.message || "Sorry! There was an unexpected error on the server."
   console.log(err.status, err.message)
