@@ -84,10 +84,11 @@ router.get("/search/:searchTerm", async (req, res) => {
     }
   })
   const totalPages = Math.ceil(matchingBooks.count / booksPerPage)
-  if(matchingBooks.length === 0) {
+  if(matchingBooks.count === 0) {
     res.render("search", { books: matchingBooks.rows, noResults: 'No results found' });
+  } else {
+    res.render("search", { books: matchingBooks.rows, searchTerm, pageNum, totalPages });
   }
-  res.render("search", { books: matchingBooks.rows, searchTerm, pageNum, totalPages });
 });
 
 // search listing pagination

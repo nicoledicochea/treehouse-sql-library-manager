@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1 
-    a(href='/')Server Error
+    a(href='/') Server Error
   h2= err.status
   .errorStack
     pre #{err.stack}
