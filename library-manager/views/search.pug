@@ -30,6 +30,7 @@ block content
       a.prev(href=`/search/${searchTerm}/page/${pageNum - 1}`) Previous
     if pageNum < totalPages
       a.next(href=`/search/${searchTerm}/page/${pageNum + 1}`) Next
+  h3 #{pageNum} of #{totalPages}
   p
     a.button(href='/') Home
 

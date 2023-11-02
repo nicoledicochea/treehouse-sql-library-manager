@@ -27,4 +27,5 @@ block content
     a.prev(href=`/books/page/${pageNum - 1}`) Previous
   if pageNum < totalPages
     a.next(href=`/books/page/${pageNum + 1}`) Next
+  h3 #{pageNum} of #{totalPages}
 
