@@ -3,7 +3,7 @@ const router = express.Router();
 const Book = require("../models").Book;
 
 // number of books to show for pagination 
-const booksPerPage = 5
+const booksPerPage = 10
 
 // show books listing
 router.get("/", async(req, res) => {

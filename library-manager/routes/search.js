@@ -4,7 +4,7 @@ const Book = require("../models").Book;
 const { Op } = require("sequelize")
 
 // number of books to show for pagination 
-const booksPerPage = 5
+const booksPerPage = 10
 
 // redirect empty search string to index
 router.get("/",async (req, res) => {
