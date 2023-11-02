@@ -26,11 +26,12 @@ block content
             td= book.author
             td= book.genre
             td= book.year
-    if pageNum > 1
-      a.prev(href=`/search/${searchTerm}/page/${pageNum - 1}`) Previous
-    if pageNum < totalPages
-      a.next(href=`/search/${searchTerm}/page/${pageNum + 1}`) Next
-  h3 #{pageNum} of #{totalPages}
+    .pagination
+      if pageNum > 1
+        a.prev(href=`/search/${searchTerm}/page/${pageNum - 1}`) Previous
+      if pageNum < totalPages
+        a.next(href=`/search/${searchTerm}/page/${pageNum + 1}`) Next
+    h3.page Page #{pageNum} of #{totalPages}
   p
     a.button(href='/') Home
 

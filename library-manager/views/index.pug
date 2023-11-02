@@ -3,8 +3,8 @@ extends layout
 block content
   h1 
     a(href="/") Books
-  p
-    a.button(href='/books/new') Create New Book
+  
+  a.button.new-book(href='/books/new') Create New Book
   form.search(action=`/search`, method="post") 
     input(type="text", name="search")
     button.search-btn(type="submit") Search
@@ -23,9 +23,10 @@ block content
           td= book.author
           td= book.genre
           td= book.year
-  if pageNum > 1 
-    a.prev(href=`/books/page/${pageNum - 1}`) Previous
-  if pageNum < totalPages
-    a.next(href=`/books/page/${pageNum + 1}`) Next
-  h3 #{pageNum} of #{totalPages}
+  .pagination
+    if pageNum > 1 
+      a.prev(href=`/books/page/${pageNum - 1}`) Previous
+    if pageNum < totalPages
+      a.next(href=`/books/page/${pageNum + 1}`) Next
+  h3.page Page #{pageNum} of #{totalPages}
 

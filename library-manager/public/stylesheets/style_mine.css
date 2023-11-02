@@ -2,9 +2,11 @@ body {
   padding: 10px 50px 50px;
   font-size: 18px;
   font-family: Arial, Helvetica, sans-serif;
+  background-color: #B7B6C1;
   color: #464655;
   display: grid;
-  max-width: 900px;
+  justify-content: center;
+  text-align: center;
 }
 
 a {
@@ -14,18 +16,22 @@ a {
   transition: 0.4s;
 }
 
-  a:hover {
-    color: #818998;
-  }
+a:hover {
+  color: #818998;
+}
 
-a.button, input[type=submit], .next, .prev {
+a.button, input[type=submit], .prev, .next {
   color: white;
   background: #818998;
-  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
-  padding: 10px 14px 12px;
+  font-family:Arial, Helvetica, sans-serif;
+  letter-spacing: 1px;
+  padding: 15px 15px 15px;
   font-size: 14px;
-  border-radius: 2px;
+  border-radius: 0px;
   cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  /* border: 1px solid #464655; */
 }
 
 form a.button, input[type=submit] {
@@ -33,14 +39,13 @@ form a.button, input[type=submit] {
   transition: 0.4s;
 }
 
-input[type=submit] {
+input[type=submit], a.button {
   border: 0;
 }
 
-a.button:hover, input[type=submit]:hover, .next:hover, .prev:hover  {
+a.button:hover, input[type=submit]:hover, .prev:hover, .next:hover {
   background-color: #464655;
   color: white;
-
 }
 
 p {
@@ -59,22 +64,41 @@ h2 {
   padding-top: 20px;
 }
 
+table {
+  /* border-left: 1px solid #464655; */
+  border-bottom: 20px solid #a9adb8;
+  /* max-width: max-content; */
+}
+
 th {
-  border-bottom: 2px solid #959ead;
-  text-align: left;
-  padding: 5px 20px 5px 10px;
+  border-bottom: 20px solid #a9adb8;
+  text-align: center;
+  padding: 40px 50px;
+  background-color: #818998;
+  color: #ebe7e9;
+  /* letter-spacing: 1px; */
+  font-size: 16px;
+  /* border: 1px solid #464655; */
 }
 
 tr {
   min-height: 50px;
+  text-align: center;
+}
+
+tr:nth-child(n) {
+  background: #dfdbde;
 }
 
 tr:nth-child(2n) {
-  background: #E7E7E7;
+  background: #ebe7e9;
 }
 
+
+
 td {
-  padding: 5px 20px 5px 10px;
+  padding: 10px 20px;
+  /* border: 1px solid #464655; */
 }
 
 label {
@@ -87,10 +111,11 @@ label {
 input {
   padding: 10px;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  border-radius: 2px;
-  border-color: #E7E7E7;
+  font-size: 16px;
   transition: 0.4s;
+  /* border-radius: 2px; */
+  border-color: #ebe7e9;
+  /* border: 1px solid #464655; */
 }
 
 input[type=text] {
@@ -99,28 +124,33 @@ input[type=text] {
 }
 
 .error {
-  color: rgb(236, 15, 15);
+  color: rgb(164, 16, 16);
 }
 
-.next, .prev {
-  width: 80px;
-  text-align: center;
+/* input.delete {
+  background-color: #464655;
 }
 
-.next {
-  grid-column: 2;
+input.delete:hover{
+  background-color: #818998;
+} */
+
+.errorStack {
+  /* background-color: red; */
+  /* overflow: scroll; */
+  font-size: 12px;
+  word-break: break-all;
+  margin: auto;
 }
 
-.pagination {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-items: center;
-  margin-top: 5px;
-}
-.page {
-  text-align: center;
+.errorStack::first-line {
+  font-weight: bold;
+  font-size: 16px;
 }
 
+.prev {
+  background-color: #959ead;
+}
 form.search {
   display: flex;
   justify-content: center;
@@ -139,7 +169,7 @@ form.search input {
   width: 40%;
   border: none;
   /* border: 1px #a9adb8 solid; */
-  background-color: #e7e7e7;
+  background-color: #dfdbde;
   color: #464655;
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
@@ -152,22 +182,5 @@ form.search input {
 
 .search-btn:hover {
   background-color: #464655;
-  color: white;
-}
-
-a.new-book {
-  justify-self: start;
-}
-
-.errorStack {
-  /* background-color: red; */
-  /* overflow: scroll; */
-  font-size: 12px;
-  word-break: break-all;
-  margin: auto;
-}
-
-.errorStack::first-line {
-  font-weight: bold;
-  font-size: 16px;
+  color: #dfdbde;
 }
